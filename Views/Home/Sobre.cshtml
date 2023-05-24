@@ -14,10 +14,28 @@ Primeiramente foi adicionado o IActionResult Sobre no arquivo HomeController.cs 
 <h2>Banco de dados</h2>
 <p>A aplicação ira utilizar como banco de dados o PostgreSQL.</p>
 
+<h3>Configuração do acesso ao banco de dados</h3>
+
+No projeto, esta sendo utilizado as bibliotecas Npgsql e Npgsql.EntityFrameworkCore.PostgreSQL via NuGet.
+No arquivo "appsettings.json" foi adicionado a string de conexão ao banco de dados PostgreSQL:
+
+
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "DefaultConnection": "Host=localhost;Port=5432;Database=ToDoList;User ID=postgres;Password=sagawe;Pooling=true;"
+  },
+  ...
+}
+
+Altere o paremetro UseSqlServer para UseNpgsql no arquivo Program.cs.
+
 <h2>Navegação</h2>
 <p>Ao acessar a primeira tela deve ser a de login.</p>
 
 <p> Os Status devem ser predefinidos no sistema: fazer (vermelho), fazendo (Amarelo) e feito (Verde).</p>
 
 <p> As categorias devem ser do usuário, assim como suas tarefas.</p>
+
+<h2>Erros durante desenvolvimento</h2>
+42704: type "nvarchar" does not exist
 

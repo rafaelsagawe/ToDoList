@@ -1,8 +1,6 @@
 # ToDoList
 
-
-
-Criação da pagina sobre
+<h2>Criação da pagina sobre</h2>
 
 <p>
 Primeiramente foi adicionado o IActionResult Sobre no arquivo HomeController.cs e depois com o botão direito do mouse adicionar exibição, assim gerando o View.

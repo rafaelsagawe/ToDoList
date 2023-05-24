@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ToDoList.Models;
 
 namespace ToDoList.Data
 {
@@ -9,5 +10,7 @@ namespace ToDoList.Data
             : base(options)
         {
         }
+        public DbSet<ToDoList.Models.Tarefa> Tarefa { get; set; } = default!;
+
     }
 }
