@@ -13,25 +13,34 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="TarefaNome" class="control-label"></label>
-                <input asp-for="TarefaNome" class="form-control" />
-                <span asp-validation-for="TarefaNome" class="text-danger"></span>
+                <label asp-for="titulo" class="control-label"></label>
+                <input asp-for="titulo" class="form-control" />
+                <span asp-validation-for="titulo" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="concluido" /> @Html.DisplayNameFor(model => model.concluido)
+                </label>
+            </div>
+
             <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
+                <label asp-for="Prioridade" class="control-label"></label>
+                <select class="form-control" asp-for="Prioridade">
+                    <option>Baixa</option>
+                    <option>Media</option>
+                    <option>Alta</option>
+                </select>
+                <span asp-validation-for="Prioridade" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <label asp-for="usuario" class="control-label"></label>
+                <input asp-for="usuario" class="form-control" />
+                <span asp-validation-for="usuario" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DataCriacao" class="control-label"></label>
-                <input asp-for="DataCriacao" class="form-control" />
-                <span asp-validation-for="DataCriacao" class="text-danger"></span>
-            </div>
+
+            <hr />
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

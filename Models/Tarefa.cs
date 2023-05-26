@@ -1,25 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace ToDoList.Models
 {
     public class Tarefa
     {
         [Key]
-        public int IdTarefa { get; set; }
+        public int id { get; set; }
 
-        [Required]
-        [Display (Name = "Nome")]
-        public string? TarefaNome { get; set; }
+        [DisplayName("Título")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+        public string? titulo { get; set; }
 
-        [Display (Name = "Descrição")]
-        public string? Descricao { get; set; }
+        [DisplayName("Status")]
+        public bool concluido { get; set; }
 
-        [Display (Name = "Status")]
-        public string? Status { get; set; }
+        [DisplayName("Prioridade")]
+        public string? Prioridade { get; set; }
 
-        [Display (Name = "Data da Criação")]
-        public DateTime? DataCriacao { get; set; } = default(DateTime?);
+        [DisplayName("Usuário da Tarefa")]
+        public string? usuario { get; set; }
 
+        [DisplayName("Data da Criação")]
+        public DateTime dataCriacao { get; set; } = DateTime.Now;
+
+        [DisplayName("Ultima Alteração")]
+        public DateTime dataAlteracao { get; set; } = DateTime.Now;
     }
 }

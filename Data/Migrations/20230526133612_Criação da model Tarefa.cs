@@ -5,7 +5,7 @@
 namespace ToDoList.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MigraçãoInicial : Migration
+    public partial class CriaçãodamodelTarefa : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

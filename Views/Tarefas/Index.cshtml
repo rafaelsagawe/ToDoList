@@ -1,28 +1,34 @@
 ﻿@model IEnumerable<ToDoList.Models.Tarefa>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tarefas";
 }
 
-<h1>Index</h1>
+<h1>Tarefas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-outline-success" asp-action="Create">Nova tarefa</a>
 </p>
-<table class="table">
+<table class="table table-striped shadow">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TarefaNome)
+                @Html.DisplayNameFor(model => model.titulo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                @Html.DisplayNameFor(model => model.concluido)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.Prioridade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataCriacao)
+                @Html.DisplayNameFor(model => model.usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataAlteracao)
             </th>
             <th></th>
         </tr>
@@ -31,21 +37,27 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TarefaNome)
+                @Html.DisplayFor(modelItem => item.titulo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
+                @Html.DisplayFor(modelItem => item.concluido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.Prioridade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataCriacao)
+                @Html.DisplayFor(modelItem => item.usuario)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdTarefa">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdTarefa">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdTarefa">Delete</a>
+                @Html.DisplayFor(modelItem => item.dataCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataAlteracao)
+            </td>
+            <td class="btn btn-group">
+                <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.id">Editar</a>
+                <a class="btn btn-outline-warning" asp-action="Details" asp-route-id="@item.id">Detalhes</a>
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.id">Deletar</a>
             </td>
         </tr>
 }

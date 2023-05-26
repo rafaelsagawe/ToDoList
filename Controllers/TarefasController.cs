@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ToDoList.Controllers
 {
@@ -22,9 +23,9 @@ namespace ToDoList.Controllers
         // GET: Tarefas
         public async Task<IActionResult> Index()
         {
-              return _context.Tarefa != null ? 
-                          View(await _context.Tarefa.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Tarefa'  is null.");
+            return _context.Tarefa != null ? 
+            View(await _context.Tarefa.ToListAsync()) :
+            Problem("Entity set 'ApplicationDbContext.Tarefa'  is null.");
         }
 
         // GET: Tarefas/Details/5
@@ -36,7 +37,7 @@ namespace ToDoList.Controllers
             }
 
             var tarefa = await _context.Tarefa
-                .FirstOrDefaultAsync(m => m.IdTarefa == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (tarefa == null)
             {
                 return NotFound();
@@ -56,10 +57,11 @@ namespace ToDoList.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTarefa,TarefaNome,Descricao,Status,DataCriacao")] Tarefa tarefa)
+        public async Task<IActionResult> Create([Bind("id,titulo,concluido,Prioridade,usuario,dataCriacao,dataAlteracao")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
+                tarefa.usuario = User.Identity.Name; // Captura o nome do usuário logado e registra em banco
                 _context.Add(tarefa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -88,9 +90,9 @@ namespace ToDoList.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTarefa,TarefaNome,Descricao,Status,DataCriacao")] Tarefa tarefa)
+        public async Task<IActionResult> Edit(int id, [Bind("id,titulo,concluido,Prioridade,usuario,dataCriacao,dataAlteracao")] Tarefa tarefa)
         {
-            if (id != tarefa.IdTarefa)
+            if (id != tarefa.id)
             {
                 return NotFound();
             }
@@ -100,11 +102,12 @@ namespace ToDoList.Controllers
                 try
                 {
                     _context.Update(tarefa);
+                    _context.Entry(tarefa).Property(dc => dc.dataCriacao).IsModified = false; // Para a data de criação não ser alterada a propriedade IsModified ficou desativada (false)
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TarefaExists(tarefa.IdTarefa))
+                    if (!TarefaExists(tarefa.id))
                     {
                         return NotFound();
                     }
@@ -127,7 +130,7 @@ namespace ToDoList.Controllers
             }
 
             var tarefa = await _context.Tarefa
-                .FirstOrDefaultAsync(m => m.IdTarefa == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (tarefa == null)
             {
                 return NotFound();
@@ -157,7 +160,7 @@ namespace ToDoList.Controllers
 
         private bool TarefaExists(int id)
         {
-          return (_context.Tarefa?.Any(e => e.IdTarefa == id)).GetValueOrDefault();
+          return (_context.Tarefa?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }

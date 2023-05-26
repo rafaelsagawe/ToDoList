@@ -12,8 +12,8 @@ using ToDoList.Data;
 namespace ToDoList.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230524173747_SQLServer")]
-    partial class SQLServer
+    [Migration("20230526133612_Criação da model Tarefa")]
+    partial class CriaçãodamodelTarefa
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,32 +225,6 @@ namespace ToDoList.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("ToDoList.Models.Tarefa", b =>
-                {
-                    b.Property<int>("IdTarefa")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTarefa"));
-
-                    b.Property<DateTime?>("DataCriacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TarefaNome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdTarefa");
-
-                    b.ToTable("Tarefa");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
